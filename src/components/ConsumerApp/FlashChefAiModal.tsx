@@ -1,0 +1,322 @@
+import React, { useState } from 'react';
+import type { DealItem } from '../../types';
+import { X, Sparkles, ChefHat, Play, CheckCircle2, Clock, Flame, Snowflake, Plus, Trash2 } from 'lucide-react';
+import { sounds } from '../../lib/soundEffects';
+
+interface FlashChefAiModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  selectedDeal?: DealItem | null;
+}
+
+interface Recipe {
+  title: string;
+  cookingTimeMinutes: number;
+  difficulty: 'Easy' | 'Medium' | 'Quick 10-Min';
+  calories: number;
+  proteinGrams: number;
+  description: string;
+  ingredients: string[];
+  steps: string[];
+  preservationTip: string;
+}
+
+const SAMPLE_RECIPES: Record<string, Recipe> = {
+  mango: {
+    title: '🥭 Royal Chaunsa Mango Sourdough Shahi Tukda',
+    cookingTimeMinutes: 12,
+    difficulty: 'Quick 10-Min',
+    calories: 290,
+    proteinGrams: 7,
+    description: 'A modern zero-waste twist on classic Pakistani dessert using surplus sourdough bread and ripe Chaunsa mango pulp.',
+    ingredients: [
+      '3 slices surplus Artisan Sourdough bread',
+      '2 ripe Chaunsa Mangoes (pureed)',
+      '1 cup Milk (or Olper’s Dairy)',
+      '1 tbsp Ghee or Butter',
+      'Pinch of Cardamom & chopped pistachios',
+    ],
+    steps: [
+      'Toast sourdough slices in a pan with 1 tbsp ghee until golden and crisp (3 mins).',
+      'Warm the milk with cardamom and drizzle 2 tablespoons over each crispy slice.',
+      'Generously top with freshly blitzed ripe Chaunsa mango puree.',
+      'Garnish with sliced pistachios and serve warm or chilled!',
+    ],
+    preservationTip: 'Freeze leftover ripe mango cubes on a flat baking tray for 2 hours, then store in ziplock bags for up to 6 months.',
+  },
+  bakery: {
+    title: '🍕 Quick Tandoori Sourdough Naan Pizza',
+    cookingTimeMinutes: 10,
+    difficulty: 'Easy',
+    calories: 340,
+    proteinGrams: 16,
+    description: 'Transform surplus bakery bread or naan into a gourmet personal tandoori pizza in 10 minutes.',
+    ingredients: [
+      '2 slices Sourdough or 1 Naan / Samosa combo surplus',
+      '3 tbsp Garlic Chili Sauce or Pizza sauce',
+      '1/2 cup Shredded Mozzarella / Cheddar',
+      '1/2 Onion & Capsicum (diced)',
+      'Sprinkle of Chaat Masala & Oregano',
+    ],
+    steps: [
+      'Preheat a pan or toaster oven on medium heat.',
+      'Spread garlic chili sauce evenly over the bread or naan base.',
+      'Top with diced veggies and generous shredded cheese.',
+      'Cover with a lid in a non-stick pan for 6-8 minutes until the cheese is bubbling.',
+      'Dust with chaat masala and slice into hot triangles.',
+    ],
+    preservationTip: 'Store extra sourdough in a sealed bag with a paper towel; refrigerate up to 5 days or freeze slices individually.',
+  },
+  general: {
+    title: '🍗 Gourmet Desi Fusion Surplus Stir-Fry & Rice',
+    cookingTimeMinutes: 15,
+    difficulty: 'Easy',
+    calories: 420,
+    proteinGrams: 28,
+    description: 'High-protein, zero-waste family meal repurposing restaurant BBQ surplus and fresh produce.',
+    ingredients: [
+      'Rescued Chicken Tikka or Biryani portion',
+      '1 cup Mixed Veggies (Onions, Tomatoes, Green Chilies)',
+      '1 tbsp Soy sauce & 1 tsp Cumin powder',
+      'Fresh Coriander leaves for garnish',
+    ],
+    steps: [
+      'Shred the rescued BBQ chicken into bite-sized strips.',
+      'Saute onions and tomatoes in a pan with a drop of oil and cumin (3 mins).',
+      'Toss in the chicken and rice/veggies on high heat for 5 minutes.',
+      'Drizzle with soy sauce and lime juice, garnish with coriander and serve steaming hot.',
+    ],
+    preservationTip: 'Cooked meat surplus can be vacuum sealed or placed in airtight glass containers for 3 days in the fridge.',
+  },
+};
+
+export const FlashChefAiModal: React.FC<FlashChefAiModalProps> = ({
+  isOpen,
+  onClose,
+  selectedDeal,
+}) => {
+  const [ingredients, setIngredients] = useState<string[]>([
+    selectedDeal?.title || 'Chaunsa Mangoes',
+    'Sourdough Bread',
+    'Fresh Milk',
+  ]);
+  const [customInput, setCustomInput] = useState('');
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [activeRecipe, setActiveRecipe] = useState<Recipe | null>(SAMPLE_RECIPES.mango);
+  const [cookingTimerActive, setCookingTimerActive] = useState(false);
+  const [timerSeconds, setTimerSeconds] = useState(12 * 60);
+
+  if (!isOpen) return null;
+
+  const handleAddIngredient = () => {
+    if (!customInput.trim()) return;
+    setIngredients((prev) => [...prev, customInput.trim()]);
+    setCustomInput('');
+  };
+
+  const handleRemoveIngredient = (idx: number) => {
+    setIngredients((prev) => prev.filter((_, i) => i !== idx));
+  };
+
+  const handleGenerateRecipe = () => {
+    setIsGenerating(true);
+    sounds.playAlertPing();
+
+    setTimeout(() => {
+      setIsGenerating(false);
+      sounds.playSuccessFanfare();
+
+      const ingredientStr = ingredients.join(' ').toLowerCase();
+      if (ingredientStr.includes('mango') || ingredientStr.includes('fruit')) {
+        setActiveRecipe(SAMPLE_RECIPES.mango);
+        setTimerSeconds(12 * 60);
+      } else if (ingredientStr.includes('bread') || ingredientStr.includes('bakery') || ingredientStr.includes('sourdough')) {
+        setActiveRecipe(SAMPLE_RECIPES.bakery);
+        setTimerSeconds(10 * 60);
+      } else {
+        setActiveRecipe(SAMPLE_RECIPES.general);
+        setTimerSeconds(15 * 60);
+      }
+    }, 1200);
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-2xl glass-panel border border-amber-500/50 rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto bg-[#07170f]">
+        
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 p-2 rounded-full bg-emerald-950 hover:bg-emerald-900 border border-emerald-800 text-emerald-300 transition-colors"
+        >
+          <X className="size-5" />
+        </button>
+
+        {/* Header */}
+        <div className="flex items-center gap-3 mb-6">
+          <div className="size-12 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-slate-950 flex items-center justify-center shadow-lg shadow-amber-500/20">
+            <ChefHat className="size-7" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <h2 className="text-xl font-bold text-white">FlashChef AI™</h2>
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                🇵🇰 Pakistani Recipe &amp; Preservation Engine
+              </span>
+            </div>
+            <p className="text-xs text-emerald-300/70">
+              Zero-waste culinary intelligence: transform surplus ingredients into delicious meals
+            </p>
+          </div>
+        </div>
+
+        {/* Ingredient Basket & Input */}
+        <div className="p-4 rounded-2xl bg-emerald-950/70 border border-emerald-800 mb-6">
+          <label className="block text-xs font-bold text-emerald-300 mb-2">
+            🛒 Rescued &amp; Pantry Ingredients in Your Kitchen:
+          </label>
+
+          <div className="flex flex-wrap gap-2 mb-3">
+            {ingredients.map((item, idx) => (
+              <span
+                key={idx}
+                className="px-3 py-1 rounded-xl bg-emerald-900/90 text-emerald-200 text-xs font-semibold flex items-center gap-1.5 border border-emerald-700"
+              >
+                <span>{item}</span>
+                <button
+                  type="button"
+                  onClick={() => handleRemoveIngredient(idx)}
+                  className="hover:text-red-400 transition-colors"
+                >
+                  <Trash2 className="size-3" />
+                </button>
+              </span>
+            ))}
+          </div>
+
+          <div className="flex gap-2">
+            <input
+              type="text"
+              placeholder="Add item (e.g. Greek yogurt, chicken, eggs)..."
+              value={customInput}
+              onChange={(e) => setCustomInput(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleAddIngredient()}
+              className="flex-1 px-3 py-2 rounded-xl bg-slate-950 border border-emerald-700 text-xs text-white placeholder-emerald-400/40 font-medium"
+            />
+            <button
+              onClick={handleAddIngredient}
+              className="px-3 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-bold flex items-center gap-1"
+            >
+              <Plus className="size-3.5" />
+              <span>Add</span>
+            </button>
+            <button
+              onClick={handleGenerateRecipe}
+              disabled={isGenerating}
+              className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 text-xs font-black shadow-lg flex items-center gap-1.5 transition-all transform active:scale-95 disabled:opacity-50"
+            >
+              <Sparkles className="size-3.5" />
+              <span>{isGenerating ? 'Cooking AI...' : 'Generate Recipe 🍳'}</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Recipe Display Card */}
+        {activeRecipe && (
+          <div className="p-6 rounded-3xl bg-slate-950 border border-amber-500/40 flex flex-col gap-5 shadow-2xl animate-in zoom-in-95 duration-200">
+            
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-emerald-900/60 pb-3">
+              <div>
+                <h3 className="text-lg font-black text-white">{activeRecipe.title}</h3>
+                <p className="text-xs text-emerald-300/80 mt-0.5">{activeRecipe.description}</p>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <span className="px-2.5 py-1 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[11px] font-bold">
+                  {activeRecipe.difficulty}
+                </span>
+                <span className="px-2.5 py-1 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[11px] font-bold">
+                  ⏱️ {activeRecipe.cookingTimeMinutes} Mins
+                </span>
+              </div>
+            </div>
+
+            {/* Macros Summary */}
+            <div className="grid grid-cols-2 gap-3 text-xs">
+              <div className="p-2.5 rounded-xl bg-emerald-950/60 border border-emerald-800 text-center">
+                <span className="text-[10px] text-emerald-400/80 uppercase font-semibold block">Estimated Calories</span>
+                <span className="font-black text-amber-300 text-sm">{activeRecipe.calories} kcal</span>
+              </div>
+              <div className="p-2.5 rounded-xl bg-emerald-950/60 border border-emerald-800 text-center">
+                <span className="text-[10px] text-emerald-400/80 uppercase font-semibold block">Protein Content</span>
+                <span className="font-black text-emerald-200 text-sm">{activeRecipe.proteinGrams}g Protein</span>
+              </div>
+            </div>
+
+            {/* Ingredients Needed */}
+            <div>
+              <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <Flame className="size-3.5 text-orange-400" />
+                Required Proportions:
+              </h4>
+              <ul className="space-y-1 text-xs text-emerald-200/90 list-disc list-inside">
+                {activeRecipe.ingredients.map((ing, i) => (
+                  <li key={i}>{ing}</li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Step by Step Cooking Instructions */}
+            <div>
+              <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <CheckCircle2 className="size-3.5 text-emerald-400" />
+                Step-by-Step Cooking Guide:
+              </h4>
+              <ol className="space-y-2 text-xs text-emerald-100/90">
+                {activeRecipe.steps.map((st, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="font-bold text-amber-400">{i + 1}.</span>
+                    <span>{st}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            {/* Zero-Waste Shelf-Life Preservation Box */}
+            <div className="p-3.5 rounded-2xl bg-cyan-950/50 border border-cyan-700/60 text-xs flex items-start gap-2.5">
+              <Snowflake className="size-5 text-cyan-400 flex-shrink-0 mt-0.5" />
+              <div>
+                <span className="font-bold text-cyan-300 block mb-0.5">Zero-Waste Shelf-Life Trick:</span>
+                <p className="text-cyan-100/80 leading-relaxed text-[11px]">
+                  {activeRecipe.preservationTip}
+                </p>
+              </div>
+            </div>
+
+            {/* Cooking Voice / Timer Controls */}
+            <div className="flex items-center justify-between pt-2 border-t border-emerald-900/60">
+              <div className="flex items-center gap-2">
+                <Clock className="size-4 text-amber-400" />
+                <span className="font-mono text-sm font-bold text-amber-300">
+                  {Math.floor(timerSeconds / 60)}:{(timerSeconds % 60).toString().padStart(2, '0')}
+                </span>
+              </div>
+
+              <button
+                onClick={() => {
+                  setCookingTimerActive(!cookingTimerActive);
+                  sounds.playLaserBeep();
+                }}
+                className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1.5 shadow transition-colors"
+              >
+                <Play className="size-3.5" />
+                <span>{cookingTimerActive ? 'Pause Cooking Timer' : 'Start Step-by-Step Timer'}</span>
+              </button>
+            </div>
+
+          </div>
+        )}
+
+      </div>
+    </div>
+  );
+};
