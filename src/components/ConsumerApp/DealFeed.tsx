@@ -52,7 +52,7 @@ export const DealFeed: React.FC<DealFeedProps> = ({
     <div className="flex flex-col gap-6">
       
       {/* Search & Filter Header Bar */}
-      <div className="glass-panel p-4 lg:p-6 rounded-3xl border border-emerald-800/40 flex flex-col gap-4 shadow-xl">
+      <div className="glass-panel p-4 lg:p-6 rounded-3xl border border-slate-800/80 flex flex-col gap-4 shadow-xl">
         
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
           {/* Search Input */}
@@ -62,15 +62,15 @@ export const DealFeed: React.FC<DealFeedProps> = ({
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search biryani, sourdough, chaunsa mangoes, Al-Fatah, Lahore, Karachi..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-emerald-950/80 border border-emerald-700/50 text-emerald-100 placeholder-emerald-400/50 text-xs sm:text-sm focus:outline-none focus:border-emerald-400 transition-colors"
+              placeholder="Search biryani, artisan sourdough, chaunsa mangoes, Al-Fatah, Karachi, Lahore..."
+              className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-slate-900/90 border border-slate-700/80 text-slate-100 placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400/30 transition-all"
             />
           </div>
 
           {/* Discount Slider Quick Filter */}
-          <div className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-emerald-950/80 border border-emerald-800/50 text-xs">
-            <Flame className="size-4 text-amber-400" />
-            <span className="text-emerald-300 font-medium whitespace-nowrap">Min Discount:</span>
+          <div className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-slate-900/90 border border-slate-800 text-xs shadow-inner">
+            <Flame className="size-4 text-amber-400 animate-pulse" />
+            <span className="text-slate-300 font-semibold whitespace-nowrap">Min Discount:</span>
             <div className="flex items-center gap-2">
               <input
                 type="range"
@@ -81,7 +81,7 @@ export const DealFeed: React.FC<DealFeedProps> = ({
                 onChange={(e) => setMinDiscount(Number(e.target.value))}
                 className="w-24 accent-emerald-500 cursor-pointer"
               />
-              <span className="font-bold text-amber-300 w-12">{minDiscount}%+</span>
+              <span className="font-bold text-amber-400 w-12">{minDiscount}%+</span>
             </div>
           </div>
         </div>
@@ -92,10 +92,10 @@ export const DealFeed: React.FC<DealFeedProps> = ({
             <button
               key={cat.key}
               onClick={() => setSelectedCategory(cat.key)}
-              className={`px-4 py-1.5 rounded-xl text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all ${
+              className={`px-4 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
                 selectedCategory === cat.key
-                  ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
-                  : 'bg-emerald-950/70 text-emerald-300/80 hover:text-white hover:bg-emerald-900/60 border border-emerald-800/40'
+                  ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 shadow-md shadow-emerald-950/40 scale-102'
+                  : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800 border border-slate-800'
               }`}
             >
               {cat.label}
@@ -103,30 +103,29 @@ export const DealFeed: React.FC<DealFeedProps> = ({
           ))}
         </div>
 
-
       </div>
 
       {/* Dynamic Deals Grid */}
       <div className="flex items-center justify-between px-2">
-        <h2 className="text-lg font-bold text-white flex items-center gap-2">
-          <span>Live Surplus Flash Deals in Pakistan</span>
-          <span className="px-2.5 py-0.5 rounded-full text-xs bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-            {filteredDeals.length} deals
+        <h2 className="text-lg font-black text-white flex items-center gap-2 tracking-tight">
+          <span>Live Surplus Flash Deals</span>
+          <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+            {filteredDeals.length} active
           </span>
         </h2>
 
-        <span className="text-xs text-emerald-300/60">
-          Sorted by Time-Decay Discount & Proximity
+        <span className="text-xs text-slate-400 font-medium">
+          Sorted by Time-Decay & Proximity
         </span>
       </div>
 
       {filteredDeals.length === 0 ? (
-        <div className="glass-panel p-12 rounded-3xl text-center border border-emerald-800/40">
-          <div className="size-16 rounded-full bg-emerald-950 flex items-center justify-center mx-auto mb-3 text-2xl border border-emerald-800">
+        <div className="glass-panel p-12 rounded-3xl text-center border border-slate-800">
+          <div className="size-16 rounded-full bg-slate-900 flex items-center justify-center mx-auto mb-3 text-2xl border border-slate-800">
             🥭
           </div>
           <h3 className="text-base font-bold text-white mb-1">No Surplus Deals Match Your Filters</h3>
-          <p className="text-xs text-emerald-300/70 max-w-sm mx-auto mb-4">
+          <p className="text-xs text-slate-400 max-w-sm mx-auto mb-4">
             Try resetting your search query or lowering the minimum discount threshold.
           </p>
           <button
@@ -135,7 +134,7 @@ export const DealFeed: React.FC<DealFeedProps> = ({
               setSelectedCategory('All');
               setMinDiscount(30);
             }}
-            className="px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-500 transition-colors"
+            className="px-5 py-2.5 rounded-xl bg-emerald-500 text-slate-950 text-xs font-bold hover:bg-emerald-400 transition-all shadow-md"
           >
             Reset Filters
           </button>
@@ -154,5 +153,6 @@ export const DealFeed: React.FC<DealFeedProps> = ({
       )}
 
     </div>
+
   );
 };
