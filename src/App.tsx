@@ -73,19 +73,12 @@ export function App() {
   const [currentUser, setCurrentUser] = useState<AuthUser | null>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.USER);
-      return saved ? JSON.parse(saved) : {
-        id: 'usr-1',
-        name: 'Hamza Khan',
-        email: 'hamza.khan@gmail.com',
-        role: 'consumer',
-        totalSavedPkr: 4250,
-        itemsRescuedCount: 7,
-        rescueWalletBalancePkr: 650,
-      };
+      return saved ? JSON.parse(saved) : null;
     } catch {
       return null;
     }
   });
+
 
   // Save to localStorage when state updates
   useEffect(() => {
@@ -154,9 +147,10 @@ export function App() {
   }, [deals, selectedCity]);
 
   // Global PKR Impact Stats
-  const totalSavedPkr = (currentUser?.totalSavedPkr || 4250) + reservations.reduce((sum, r) => sum + r.savedPkr, 0);
-  const itemsRescuedCount = (currentUser?.itemsRescuedCount || 7) + reservations.reduce((sum, r) => sum + r.quantity, 0);
-  const rescueWalletBalancePkr = currentUser?.rescueWalletBalancePkr ?? 650;
+  const totalSavedPkr = (currentUser?.totalSavedPkr || 0) + reservations.reduce((sum, r) => sum + r.savedPkr, 0);
+  const itemsRescuedCount = (currentUser?.itemsRescuedCount || 0) + reservations.reduce((sum, r) => sum + r.quantity, 0);
+  const rescueWalletBalancePkr = currentUser?.rescueWalletBalancePkr ?? 0;
+
 
   const handleAddItem = (partialItem: Partial<DealItem>) => {
     const newItem: DealItem = {
