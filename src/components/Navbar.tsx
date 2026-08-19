@@ -58,7 +58,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   FlashFruit
                 </span>
                 <span className="px-2 py-0.5 text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 rounded-full flex items-center gap-1">
-                  <span>🇵🇰</span> MERN Stack
+                  <span>🇵🇰</span> Pakistan
                 </span>
               </div>
               <p className="text-xs text-emerald-200/60 hidden sm:block">
@@ -165,9 +165,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
           >
             <Cpu className="size-4 text-purple-300" />
-            <span>AI Simulator</span>
+            <span>Dynamic Pricing</span>
             <span className="px-1.5 py-0.2 rounded text-[9px] bg-purple-400/20 text-purple-300 border border-purple-400/30">
-              TFT
+              AI
             </span>
           </button>
 
@@ -194,8 +194,9 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Innovation Quick-Launch Strip */}
       <div className="max-w-7xl mx-auto mt-2 pt-2 border-t border-emerald-900/30 flex items-center gap-2 overflow-x-auto text-xs pb-0.5 scrollbar-none">
         <span className="text-[10px] uppercase font-bold text-amber-400/80 flex items-center gap-1 pl-1 flex-shrink-0">
-          <span>✨ Patent Tech:</span>
+          <span>⚡ Smart Features:</span>
         </span>
+
 
         {onOpenFlashChef && (
           <button

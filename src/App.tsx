@@ -76,7 +76,7 @@ export function App() {
       return saved ? JSON.parse(saved) : {
         id: 'usr-1',
         name: 'Hamza Khan',
-        email: 'hamza@example.com',
+        email: 'hamza.khan@gmail.com',
         role: 'consumer',
         totalSavedPkr: 4250,
         itemsRescuedCount: 7,

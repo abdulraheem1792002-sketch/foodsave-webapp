@@ -91,15 +91,16 @@ export const AiCoreSimulator: React.FC = () => {
               <Cpu className="size-5" />
             </div>
             <h2 className="text-xl font-bold text-white">
-              FlashFruit AI Core IP Simulator
+              FlashFruit AI Dynamic Pricing Engine
             </h2>
             <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40">
-              Temporal Fusion Transformer (TFT)
+              Automated Price Optimization
             </span>
           </div>
           <p className="text-xs text-purple-200/70 max-w-2xl">
-            Interactive neural forecasting model simulator. Predicts perishable spoilage risk and optimizes margin recovery vs waste probability using real-time weather, foot traffic, and event telemetry.
+            Real-time pricing optimization engine. Automatically calculates optimal discount curves based on expiry time, store footfall, and weather telemetry to safeguard store margins.
           </p>
+
         </div>
 
         <div className="px-4 py-2 rounded-2xl bg-purple-900/40 border border-purple-700/50 text-right">
@@ -275,8 +276,9 @@ export const AiCoreSimulator: React.FC = () => {
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-sm font-bold text-white flex items-center gap-2">
                 <TrendingUp className="size-4 text-purple-400" />
-                <span>TFT Predicted Price Decay &amp; Spoilage Risk Curve</span>
+                <span>AI Dynamic Price &amp; Spoilage Risk Curve</span>
               </h3>
+
               <span className="text-xs text-purple-300/80 font-mono">
                 Decay Rate: -{(100 / hoursLeft).toFixed(1)}%/hr
               </span>
