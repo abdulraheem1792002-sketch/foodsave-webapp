@@ -108,12 +108,12 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-lg glass-panel border border-emerald-700/60 rounded-3xl p-6 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-lg glass-panel border border-slate-700/80 rounded-3xl p-6 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
         
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full bg-emerald-950 hover:bg-emerald-900 border border-emerald-800 text-emerald-300 transition-colors"
+          className="absolute top-4 right-4 p-2 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 transition-colors"
         >
           <X className="size-5" />
         </button>
@@ -122,13 +122,13 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
           <div className="flex flex-col gap-4">
             
             <div className="flex items-center justify-between">
-              <span className="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+              <span className="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30 shadow-sm">
                 ⚡ 15-Minute Pickup Hold
               </span>
               {onOpenGroupSlash && (
                 <button
                   onClick={() => onOpenGroupSlash(deal)}
-                  className="px-2.5 py-1 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 text-[11px] font-black flex items-center gap-1 shadow-md hover:from-amber-300 hover:to-orange-400 transition-all"
+                  className="px-3 py-1 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 text-[11px] font-black flex items-center gap-1 shadow-md hover:scale-102 transition-all"
                 >
                   <Users className="size-3" />
                   <span>Group Slash (-15%)</span>
@@ -137,28 +137,28 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
             </div>
 
             {/* Item Summary */}
-            <div className="flex gap-4 p-3 rounded-2xl bg-emerald-950/70 border border-emerald-800/50 items-center">
+            <div className="flex gap-4 p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 items-center shadow-inner">
               <img
                 src={deal.imageUrl}
                 alt={deal.title}
-                className="size-20 rounded-xl object-cover border border-emerald-700/60 flex-shrink-0"
+                className="size-20 rounded-2xl object-cover border border-slate-700 flex-shrink-0 shadow-sm"
               />
               <div className="flex-1 min-w-0">
                 <h3 className="text-sm font-bold text-white truncate mb-1">
                   {deal.title}
                 </h3>
-                <p className="text-xs text-emerald-300/80 mb-1 flex items-center gap-1">
+                <p className="text-xs text-slate-400 mb-1 flex items-center gap-1 font-medium">
                   <MapPin className="size-3.5 text-emerald-400" />
                   {deal.storeName} ({deal.distanceKm} km away)
                 </p>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-lg font-black text-amber-300">
+                  <span className="text-lg font-black text-amber-400">
                     {formatCurrency(deal.currentPricePkr)}
                   </span>
-                  <span className="text-xs line-through text-emerald-400/50">
+                  <span className="text-xs line-through text-slate-500 font-medium">
                     {formatCurrency(deal.originalPricePkr)}
                   </span>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/20 text-red-300 border border-red-500/40">
+                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-500/15 text-rose-300 border border-rose-500/30">
                     {deal.discountPercent}% OFF
                   </span>
                 </div>
@@ -166,21 +166,21 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
             </div>
 
             {/* Quantity Selector */}
-            <div className="flex items-center justify-between p-3 rounded-2xl bg-emerald-950/60 border border-emerald-900/50">
-              <span className="text-xs font-semibold text-emerald-200">Quantity (Max {deal.stockQuantity}):</span>
+            <div className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800">
+              <span className="text-xs font-semibold text-slate-300">Quantity (Max {deal.stockQuantity}):</span>
               <div className="flex items-center gap-3">
                 <button
                   disabled={quantity <= 1}
                   onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                  className="size-8 rounded-lg bg-emerald-900 text-emerald-200 font-bold border border-emerald-700 disabled:opacity-40"
+                  className="size-8 rounded-lg bg-slate-800 text-slate-200 font-bold border border-slate-700 disabled:opacity-40 hover:bg-slate-700"
                 >
                   -
                 </button>
-                <span className="font-bold text-white text-sm w-4 text-center">{quantity}</span>
+                <span className="font-black text-white text-sm w-4 text-center">{quantity}</span>
                 <button
                   disabled={quantity >= deal.stockQuantity}
                   onClick={() => setQuantity((q) => Math.min(deal.stockQuantity, q + 1))}
-                  className="size-8 rounded-lg bg-emerald-900 text-emerald-200 font-bold border border-emerald-700 disabled:opacity-40"
+                  className="size-8 rounded-lg bg-slate-800 text-slate-200 font-bold border border-slate-700 disabled:opacity-40 hover:bg-slate-700"
                 >
                   +
                 </button>
@@ -189,27 +189,29 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
 
             {/* Fulfillment Type Selector (Self-Pickup vs Bykea Rider Delivery) */}
             <div>
-              <label className="block text-xs font-semibold text-emerald-300/80 mb-1.5 flex items-center gap-1">
+              <label className="block text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1">
                 <Bike className="size-3.5 text-amber-400" />
                 Fulfillment Mode:
               </label>
               <div className="grid grid-cols-2 gap-2 text-xs">
                 <button
+                  type="button"
                   onClick={() => setFulfillmentType('self-pickup')}
-                  className={`p-2.5 rounded-xl border text-center font-bold transition-all ${
+                  className={`p-3 rounded-2xl border text-center font-bold transition-all ${
                     fulfillmentType === 'self-pickup'
-                      ? 'bg-emerald-600 text-white border-emerald-400 ring-2 ring-emerald-400/30'
-                      : 'bg-emerald-950/60 text-emerald-300/70 border-emerald-900 hover:border-emerald-700'
+                      ? 'bg-emerald-500 text-slate-950 border-emerald-400 ring-2 ring-emerald-400/30 shadow-md'
+                      : 'bg-slate-900/80 text-slate-300 border-slate-800 hover:border-slate-700'
                   }`}
                 >
                   🚶 Self-Pickup (Free)
                 </button>
                 <button
+                  type="button"
                   onClick={() => setFulfillmentType('bykea-delivery')}
-                  className={`p-2.5 rounded-xl border text-center font-bold transition-all ${
+                  className={`p-3 rounded-2xl border text-center font-bold transition-all ${
                     fulfillmentType === 'bykea-delivery'
-                      ? 'bg-amber-500 text-slate-950 border-amber-300 ring-2 ring-amber-300/30'
-                      : 'bg-emerald-950/60 text-emerald-300/70 border-emerald-900 hover:border-emerald-700'
+                      ? 'bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 border-amber-300 ring-2 ring-amber-300/30 shadow-md'
+                      : 'bg-slate-900/80 text-slate-300 border-slate-800 hover:border-slate-700'
                   }`}
                 >
                   🏍️ Bykea Express (+ ₨ 150)
@@ -219,14 +221,14 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
 
             {/* Rescue Wallet Balance Deduction Toggle */}
             {userWalletBalancePkr > 0 && (
-              <div className="p-3 rounded-2xl bg-gradient-to-r from-emerald-950 via-teal-950 to-emerald-900/60 border border-emerald-600/60 flex items-center justify-between">
+              <div className="p-3.5 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-900 to-slate-800 border border-slate-700/80 flex items-center justify-between shadow-inner">
                 <div className="flex items-center gap-2.5">
-                  <div className="size-8 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-bold text-xs">
+                  <div className="size-8 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-bold text-xs shadow-sm">
                     🪙
                   </div>
                   <div>
                     <span className="text-xs font-bold text-white block">Use Rescue Cashback Wallet</span>
-                    <span className="text-[10px] text-amber-300">Balance: {formatCurrency(userWalletBalancePkr)} available</span>
+                    <span className="text-[10px] text-amber-300 font-medium">Balance: {formatCurrency(userWalletBalancePkr)} available</span>
                   </div>
                 </div>
 
@@ -236,7 +238,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                   className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
                     useWalletBalance
                       ? 'bg-emerald-500 text-slate-950 shadow'
-                      : 'bg-emerald-900/80 text-emerald-200 border border-emerald-700'
+                      : 'bg-slate-800 text-slate-200 border border-slate-700 hover:bg-slate-700'
                   }`}
                 >
                   {useWalletBalance ? '✓ Applied' : 'Apply'}
@@ -246,37 +248,40 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
 
             {/* Payment Method Selector */}
             <div>
-              <label className="block text-xs font-semibold text-emerald-300/80 mb-1.5 flex items-center gap-1">
+              <label className="block text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1">
                 <Wallet className="size-3.5 text-amber-400" />
                 Select Payment Method:
               </label>
               <div className="grid grid-cols-3 gap-2">
                 <button
+                  type="button"
                   onClick={() => setPaymentMethod('JazzCash')}
                   className={`p-2.5 rounded-xl border text-center transition-all text-xs font-bold ${
                     paymentMethod === 'JazzCash'
-                      ? 'bg-red-600 text-white border-red-400 ring-2 ring-red-400/30'
-                      : 'bg-emerald-950/60 text-emerald-300/70 border-emerald-900 hover:border-emerald-700'
+                      ? 'bg-red-600 text-white border-red-400 ring-2 ring-red-400/30 shadow-md'
+                      : 'bg-slate-900/80 text-slate-300 border-slate-800 hover:border-slate-700'
                   }`}
                 >
                   🔴 JazzCash
                 </button>
                 <button
+                  type="button"
                   onClick={() => setPaymentMethod('EasyPaisa')}
                   className={`p-2.5 rounded-xl border text-center transition-all text-xs font-bold ${
                     paymentMethod === 'EasyPaisa'
-                      ? 'bg-emerald-600 text-white border-emerald-400 ring-2 ring-emerald-400/30'
-                      : 'bg-emerald-950/60 text-emerald-300/70 border-emerald-900 hover:border-emerald-700'
+                      ? 'bg-emerald-600 text-white border-emerald-400 ring-2 ring-emerald-400/30 shadow-md'
+                      : 'bg-slate-900/80 text-slate-300 border-slate-800 hover:border-slate-700'
                   }`}
                 >
                   🟢 EasyPaisa
                 </button>
                 <button
+                  type="button"
                   onClick={() => setPaymentMethod('Cash on Pickup')}
                   className={`p-2.5 rounded-xl border text-center transition-all text-xs font-bold ${
                     paymentMethod === 'Cash on Pickup'
-                      ? 'bg-amber-600 text-slate-950 border-amber-300 ring-2 ring-amber-300/30'
-                      : 'bg-emerald-950/60 text-emerald-300/70 border-emerald-900 hover:border-emerald-700'
+                      ? 'bg-amber-500 text-slate-950 border-amber-300 ring-2 ring-amber-300/30 shadow-md'
+                      : 'bg-slate-900/80 text-slate-300 border-slate-800 hover:border-slate-700'
                   }`}
                 >
                   💵 Cash
@@ -285,14 +290,14 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
             </div>
 
             {/* Order Summary Breakdown */}
-            <div className="p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between text-xs">
+            <div className="p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between text-xs shadow-inner">
               <div>
-                <span className="text-amber-300 font-bold block">Savings: {formatCurrency(totalSavingsPkr)}</span>
-                <span className="text-emerald-300/80 text-[10px] block">Includes 5% Instant PKR Rescue Cashback!</span>
+                <span className="text-amber-400 font-bold block">Savings: {formatCurrency(totalSavingsPkr)}</span>
+                <span className="text-emerald-400 text-[10px] block font-medium">Includes 5% Instant PKR Rescue Cashback!</span>
               </div>
               <div className="text-right">
-                <span className="text-emerald-300/70 block">Total Payable</span>
-                <span className="text-xl font-black text-amber-300">{formatCurrency(totalPricePkr)}</span>
+                <span className="text-slate-400 block">Total Payable</span>
+                <span className="text-xl font-black text-amber-400">{formatCurrency(totalPricePkr)}</span>
               </div>
             </div>
 
@@ -300,7 +305,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
             <button
               disabled={isSubmitting}
               onClick={handleConfirm}
-              className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-amber-400 hover:from-emerald-400 hover:to-amber-300 disabled:opacity-50 text-slate-950 font-black text-sm shadow-xl flex items-center justify-center gap-2 transition-transform transform active:scale-95"
+              className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-amber-400 hover:from-emerald-400 hover:to-amber-300 disabled:opacity-50 text-slate-950 font-black text-sm shadow-xl flex items-center justify-center gap-2 transition-all transform active:scale-98 hover:scale-101"
             >
               <Sparkles className="size-5 text-slate-950" />
               <span>{isSubmitting ? 'Reserving...' : `Reserve with ${paymentMethod}`}</span>
@@ -308,6 +313,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
 
           </div>
         ) : (
+
           /* Reserved Confirmation View (Pickup Code & Bykea Rider Tracking) */
           <div className="flex flex-col items-center text-center gap-4 py-2 animate-in zoom-in-95 duration-300">
             

@@ -141,37 +141,37 @@ export const FlashChefAiModal: React.FC<FlashChefAiModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-2xl glass-panel border border-amber-500/50 rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto bg-[#07170f]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-2xl glass-panel border border-slate-700/80 rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto bg-slate-950/95">
         
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full bg-emerald-950 hover:bg-emerald-900 border border-emerald-800 text-emerald-300 transition-colors"
+          className="absolute top-4 right-4 p-2 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 transition-colors"
         >
           <X className="size-5" />
         </button>
 
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">
-          <div className="size-12 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-slate-950 flex items-center justify-center shadow-lg shadow-amber-500/20">
+          <div className="size-12 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-slate-950 flex items-center justify-center shadow-lg shadow-amber-500/20 flex-shrink-0 font-bold">
             <ChefHat className="size-7" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-xl font-bold text-white">FlashChef AI™</h2>
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">
-                🇵🇰 Pakistani Recipe &amp; Preservation Engine
+              <h2 className="text-xl font-black text-white tracking-tight">FlashChef AI™</h2>
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                Pakistani Recipe &amp; Preservation Engine
               </span>
             </div>
-            <p className="text-xs text-emerald-300/70">
+            <p className="text-xs text-slate-400 font-medium">
               Zero-waste culinary intelligence: transform surplus ingredients into delicious meals
             </p>
           </div>
         </div>
 
         {/* Ingredient Basket & Input */}
-        <div className="p-4 rounded-2xl bg-emerald-950/70 border border-emerald-800 mb-6">
-          <label className="block text-xs font-bold text-emerald-300 mb-2">
+        <div className="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 mb-6 shadow-inner">
+          <label className="block text-xs font-bold text-slate-300 mb-2">
             🛒 Rescued &amp; Pantry Ingredients in Your Kitchen:
           </label>
 
@@ -179,7 +179,7 @@ export const FlashChefAiModal: React.FC<FlashChefAiModalProps> = ({
             {ingredients.map((item, idx) => (
               <span
                 key={idx}
-                className="px-3 py-1 rounded-xl bg-emerald-900/90 text-emerald-200 text-xs font-semibold flex items-center gap-1.5 border border-emerald-700"
+                className="px-3 py-1 rounded-xl bg-slate-800 text-slate-200 text-xs font-semibold flex items-center gap-1.5 border border-slate-700 shadow-sm"
               >
                 <span>{item}</span>
                 <button
@@ -200,11 +200,11 @@ export const FlashChefAiModal: React.FC<FlashChefAiModalProps> = ({
               value={customInput}
               onChange={(e) => setCustomInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleAddIngredient()}
-              className="flex-1 px-3 py-2 rounded-xl bg-slate-950 border border-emerald-700 text-xs text-white placeholder-emerald-400/40 font-medium"
+              className="flex-1 px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white placeholder-slate-500 font-medium focus:border-emerald-400 focus:outline-none"
             />
             <button
               onClick={handleAddIngredient}
-              className="px-3 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-bold flex items-center gap-1"
+              className="px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold flex items-center gap-1 border border-slate-700 transition-colors"
             >
               <Plus className="size-3.5" />
               <span>Add</span>
@@ -212,7 +212,7 @@ export const FlashChefAiModal: React.FC<FlashChefAiModalProps> = ({
             <button
               onClick={handleGenerateRecipe}
               disabled={isGenerating}
-              className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 text-xs font-black shadow-lg flex items-center gap-1.5 transition-all transform active:scale-95 disabled:opacity-50"
+              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 text-xs font-black shadow-lg flex items-center gap-1.5 transition-all transform active:scale-95 disabled:opacity-50"
             >
               <Sparkles className="size-3.5" />
               <span>{isGenerating ? 'Cooking AI...' : 'Generate Recipe 🍳'}</span>
@@ -222,19 +222,19 @@ export const FlashChefAiModal: React.FC<FlashChefAiModalProps> = ({
 
         {/* Recipe Display Card */}
         {activeRecipe && (
-          <div className="p-6 rounded-3xl bg-slate-950 border border-amber-500/40 flex flex-col gap-5 shadow-2xl animate-in zoom-in-95 duration-200">
+          <div className="p-6 rounded-3xl bg-slate-900/95 border border-amber-500/40 flex flex-col gap-5 shadow-2xl animate-in zoom-in-95 duration-200">
             
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-emerald-900/60 pb-3">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
               <div>
                 <h3 className="text-lg font-black text-white">{activeRecipe.title}</h3>
-                <p className="text-xs text-emerald-300/80 mt-0.5">{activeRecipe.description}</p>
+                <p className="text-xs text-slate-400 mt-0.5">{activeRecipe.description}</p>
               </div>
 
               <div className="flex items-center gap-2">
-                <span className="px-2.5 py-1 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[11px] font-bold">
+                <span className="px-2.5 py-1 rounded-xl bg-amber-500/15 text-amber-300 border border-amber-500/30 text-[11px] font-bold">
                   {activeRecipe.difficulty}
                 </span>
-                <span className="px-2.5 py-1 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[11px] font-bold">
+                <span className="px-2.5 py-1 rounded-xl bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-[11px] font-bold">
                   ⏱️ {activeRecipe.cookingTimeMinutes} Mins
                 </span>
               </div>
@@ -242,23 +242,23 @@ export const FlashChefAiModal: React.FC<FlashChefAiModalProps> = ({
 
             {/* Macros Summary */}
             <div className="grid grid-cols-2 gap-3 text-xs">
-              <div className="p-2.5 rounded-xl bg-emerald-950/60 border border-emerald-800 text-center">
-                <span className="text-[10px] text-emerald-400/80 uppercase font-semibold block">Estimated Calories</span>
-                <span className="font-black text-amber-300 text-sm">{activeRecipe.calories} kcal</span>
+              <div className="p-3 rounded-2xl bg-slate-950/80 border border-slate-800 text-center">
+                <span className="text-[10px] text-slate-400 uppercase font-semibold block">Estimated Calories</span>
+                <span className="font-black text-amber-400 text-sm">{activeRecipe.calories} kcal</span>
               </div>
-              <div className="p-2.5 rounded-xl bg-emerald-950/60 border border-emerald-800 text-center">
-                <span className="text-[10px] text-emerald-400/80 uppercase font-semibold block">Protein Content</span>
-                <span className="font-black text-emerald-200 text-sm">{activeRecipe.proteinGrams}g Protein</span>
+              <div className="p-3 rounded-2xl bg-slate-950/80 border border-slate-800 text-center">
+                <span className="text-[10px] text-slate-400 uppercase font-semibold block">Protein Content</span>
+                <span className="font-black text-emerald-400 text-sm">{activeRecipe.proteinGrams}g Protein</span>
               </div>
             </div>
 
             {/* Ingredients Needed */}
             <div>
-              <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+              <h4 className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
                 <Flame className="size-3.5 text-orange-400" />
                 Required Proportions:
               </h4>
-              <ul className="space-y-1 text-xs text-emerald-200/90 list-disc list-inside">
+              <ul className="space-y-1 text-xs text-slate-300 list-disc list-inside">
                 {activeRecipe.ingredients.map((ing, i) => (
                   <li key={i}>{ing}</li>
                 ))}
@@ -267,11 +267,11 @@ export const FlashChefAiModal: React.FC<FlashChefAiModalProps> = ({
 
             {/* Step by Step Cooking Instructions */}
             <div>
-              <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+              <h4 className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
                 <CheckCircle2 className="size-3.5 text-emerald-400" />
                 Step-by-Step Cooking Guide:
               </h4>
-              <ol className="space-y-2 text-xs text-emerald-100/90">
+              <ol className="space-y-2 text-xs text-slate-200">
                 {activeRecipe.steps.map((st, i) => (
                   <li key={i} className="flex gap-2">
                     <span className="font-bold text-amber-400">{i + 1}.</span>
@@ -282,21 +282,21 @@ export const FlashChefAiModal: React.FC<FlashChefAiModalProps> = ({
             </div>
 
             {/* Zero-Waste Shelf-Life Preservation Box */}
-            <div className="p-3.5 rounded-2xl bg-cyan-950/50 border border-cyan-700/60 text-xs flex items-start gap-2.5">
+            <div className="p-3.5 rounded-2xl bg-cyan-950/40 border border-cyan-700/50 text-xs flex items-start gap-2.5">
               <Snowflake className="size-5 text-cyan-400 flex-shrink-0 mt-0.5" />
               <div>
                 <span className="font-bold text-cyan-300 block mb-0.5">Zero-Waste Shelf-Life Trick:</span>
-                <p className="text-cyan-100/80 leading-relaxed text-[11px]">
+                <p className="text-cyan-100/90 leading-relaxed text-[11px]">
                   {activeRecipe.preservationTip}
                 </p>
               </div>
             </div>
 
             {/* Cooking Voice / Timer Controls */}
-            <div className="flex items-center justify-between pt-2 border-t border-emerald-900/60">
+            <div className="flex items-center justify-between pt-2 border-t border-slate-800">
               <div className="flex items-center gap-2">
                 <Clock className="size-4 text-amber-400" />
-                <span className="font-mono text-sm font-bold text-amber-300">
+                <span className="font-mono text-sm font-bold text-amber-400">
                   {Math.floor(timerSeconds / 60)}:{(timerSeconds % 60).toString().padStart(2, '0')}
                 </span>
               </div>
@@ -306,7 +306,7 @@ export const FlashChefAiModal: React.FC<FlashChefAiModalProps> = ({
                   setCookingTimerActive(!cookingTimerActive);
                   sounds.playLaserBeep();
                 }}
-                className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1.5 shadow transition-colors"
+                className="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs flex items-center gap-1.5 shadow-md transition-colors"
               >
                 <Play className="size-3.5" />
                 <span>{cookingTimerActive ? 'Pause Cooking Timer' : 'Start Step-by-Step Timer'}</span>
@@ -318,5 +318,6 @@ export const FlashChefAiModal: React.FC<FlashChefAiModalProps> = ({
 
       </div>
     </div>
+
   );
 };

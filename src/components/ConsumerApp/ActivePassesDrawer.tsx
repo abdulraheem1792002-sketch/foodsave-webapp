@@ -69,21 +69,21 @@ export const ActivePassesDrawer: React.FC<ActivePassesDrawerProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-md bg-[#09150e] border-l border-emerald-800/60 h-full p-6 shadow-2xl overflow-y-auto flex flex-col justify-between">
+    <div className="fixed inset-0 z-50 flex justify-end bg-slate-950/85 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-md bg-[#080d16] border-l border-slate-800 h-full p-6 shadow-2xl overflow-y-auto flex flex-col justify-between">
         
         <div>
-          <div className="flex items-center justify-between border-b border-emerald-900/60 pb-4 mb-6">
+          <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
             <div className="flex items-center gap-2">
               <ShoppingBag className="size-5 text-amber-400" />
-              <h2 className="text-lg font-bold text-white">My Reservations</h2>
-              <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">
+              <h2 className="text-lg font-black text-white tracking-tight">My Reservations</h2>
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">
                 {reservations.length}
               </span>
             </div>
             <button
               onClick={onClose}
-              className="p-2 rounded-full bg-emerald-950 hover:bg-emerald-900 border border-emerald-800 text-emerald-300 transition-colors"
+              className="p-2 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 transition-colors"
             >
               <X className="size-5" />
             </button>
@@ -91,15 +91,16 @@ export const ActivePassesDrawer: React.FC<ActivePassesDrawerProps> = ({
 
           {reservations.length === 0 ? (
             <div className="text-center py-16">
-              <div className="size-16 rounded-full bg-emerald-950 flex items-center justify-center mx-auto mb-3 text-2xl border border-emerald-800">
+              <div className="size-16 rounded-full bg-slate-900 flex items-center justify-center mx-auto mb-3 text-2xl border border-slate-800 shadow-inner">
                 🎟️
               </div>
               <h3 className="text-base font-bold text-white mb-1">No Active Reservations</h3>
-              <p className="text-xs text-emerald-300/70 max-w-xs mx-auto">
+              <p className="text-xs text-slate-400 max-w-xs mx-auto">
                 Reserve dynamic surplus food deals to generate your 15-minute pickup codes!
               </p>
             </div>
           ) : (
+
             <div className="flex flex-col gap-4">
               {reservations.map((res) => (
                 <div

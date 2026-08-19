@@ -60,29 +60,31 @@ export const BykeaTrackerModal: React.FC<BykeaTrackerModalProps> = ({
   const riderPhone = reservation.bykeaRiderPhone || '+92 312 8889900';
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-lg glass-panel border border-amber-500/50 rounded-3xl p-6 shadow-2xl overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-lg glass-panel border border-slate-700/80 rounded-3xl p-6 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
         
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-emerald-950 hover:bg-emerald-900 border border-emerald-800 text-emerald-300 transition-colors"
+          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 transition-colors"
         >
           <X className="size-5" />
         </button>
 
         {/* Header */}
-        <div className="flex items-center gap-2.5 mb-4">
-          <div className="size-11 rounded-2xl bg-amber-500/20 text-amber-300 border border-amber-500/40 flex items-center justify-center shadow-lg">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="size-11 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-slate-950 flex items-center justify-center shadow-lg shadow-amber-950/50 flex-shrink-0 font-bold">
             <Bike className="size-6 animate-pulse" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-base font-bold text-white">Bykea Express Live GPS Tracker</h3>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">
-                🇵🇰 Express 15m
+              <h3 className="text-base font-black text-white tracking-tight">Bykea Express Live Tracker</h3>
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                LIVE GPS
               </span>
             </div>
-            <p className="text-xs text-emerald-300/70">Live delivery tracking for Pass #{reservation.pickupCode}</p>
+            <p className="text-xs text-slate-400 font-medium">
+              Order #{reservation.pickupCode} • Delivery in Progress
+            </p>
           </div>
         </div>
 
@@ -101,55 +103,55 @@ export const BykeaTrackerModal: React.FC<BykeaTrackerModalProps> = ({
 
           {/* Animated Rider Marker Moving on Map */}
           <div className="relative z-10 w-full py-4">
-            <div className="relative w-full h-2 rounded-full bg-emerald-950 border border-emerald-800 flex items-center">
+            <div className="relative w-full h-2.5 rounded-full bg-slate-900 border border-slate-800 flex items-center">
               <div
                 style={{ width: `${(currentStageIdx + 1) * 25}%` }}
-                className="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-amber-400 rounded-full transition-all duration-700"
+                className="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-amber-400 rounded-full transition-all duration-700 shadow-sm"
               />
               <div
                 style={{ left: `${(currentStageIdx + 1) * 25 - 4}%` }}
-                className="absolute size-8 rounded-full bg-amber-500 text-slate-950 border-2 border-white shadow-xl flex items-center justify-center transition-all duration-700 -translate-y-0.5"
+                className="absolute size-8 rounded-full bg-amber-500 text-slate-950 border-2 border-white shadow-xl flex items-center justify-center transition-all duration-700 -translate-y-0.5 font-bold"
               >
                 <Bike className="size-4 animate-bounce" />
               </div>
             </div>
-            <div className="flex justify-between text-[10px] text-emerald-300/70 mt-2 font-mono">
+            <div className="flex justify-between text-[10px] text-slate-400 mt-2 font-mono font-medium">
               <span>🏪 {reservation.item.storeName.split(' ')[0]}</span>
               <span>🛣️ Main Blvd</span>
-              <span>📍 Dropoff ({reservation.item.location.city})</span>
+              <span>📍 {reservation.item.location.city}</span>
             </div>
           </div>
 
-          <div className="relative z-10 flex items-center justify-between text-xs text-emerald-200">
-            <span className="flex items-center gap-1">
+          <div className="relative z-10 flex items-center justify-between text-xs text-slate-200">
+            <span className="flex items-center gap-1.5 font-medium">
               <Navigation className="size-3 text-emerald-400" />
               <span>Status: <strong className="text-white">{STAGES[currentStageIdx].title}</strong></span>
             </span>
-            <span className="text-[10px] text-emerald-400/80">{STAGES[currentStageIdx].desc}</span>
+            <span className="text-[10px] text-slate-400 font-medium">{STAGES[currentStageIdx].desc}</span>
           </div>
         </div>
 
         {/* Rider Profile Card */}
-        <div className="p-3.5 rounded-2xl bg-emerald-950/80 border border-emerald-800/80 flex items-center justify-between gap-3 mb-4">
+        <div className="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-center justify-between gap-3 mb-4 shadow-inner">
           <div className="flex items-center gap-3">
-            <div className="size-11 rounded-full bg-amber-500 text-slate-950 font-bold flex items-center justify-center text-base">
+            <div className="size-11 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-slate-950 font-black flex items-center justify-center text-sm shadow-md">
               TM
             </div>
             <div>
               <div className="flex items-center gap-1.5">
                 <h4 className="text-xs font-bold text-white">{riderName}</h4>
-                <span className="px-1.5 py-0.2 rounded text-[9px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-0.5">
+                <span className="px-1.5 py-0.2 rounded text-[9px] bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 flex items-center gap-0.5 font-bold">
                   <ShieldCheck className="size-2.5 text-emerald-400" /> 4.9 ★
                 </span>
               </div>
-              <p className="text-[11px] text-emerald-300/70">Vehicle: Suzuki GD110 (LEB-8921)</p>
+              <p className="text-[11px] text-slate-400 font-medium">Vehicle: Suzuki GD110 (LEB-8921)</p>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
             <a
               href={`tel:${riderPhone}`}
-              className="p-2 rounded-xl bg-emerald-900/80 hover:bg-emerald-800 text-emerald-200 border border-emerald-700 transition-colors"
+              className="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors shadow-sm"
               title="Call Rider"
             >
               <Phone className="size-4" />
@@ -158,7 +160,7 @@ export const BykeaTrackerModal: React.FC<BykeaTrackerModalProps> = ({
               href={`https://wa.me/?text=Hi%20${encodeURIComponent(riderName)},%20tracking%20my%20FlashFruit%20order%20pass%20${reservation.pickupCode}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white shadow transition-colors"
+              className="p-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold shadow-md transition-colors"
               title="WhatsApp Rider"
             >
               <MessageCircle className="size-4" />
@@ -167,19 +169,20 @@ export const BykeaTrackerModal: React.FC<BykeaTrackerModalProps> = ({
         </div>
 
         {/* Order Details Summary */}
-        <div className="p-3 rounded-2xl bg-slate-950/80 border border-emerald-900 flex items-center justify-between text-xs">
+        <div className="p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-center justify-between text-xs shadow-inner">
           <div className="flex items-center gap-2 truncate">
             <MapPin className="size-4 text-emerald-400 flex-shrink-0" />
-            <span className="text-emerald-200/80 truncate">
+            <span className="text-slate-300 truncate font-medium">
               {reservation.item.title} (Qty: {reservation.quantity})
             </span>
           </div>
-          <span className="font-black text-amber-300 flex-shrink-0 ml-2">
+          <span className="font-black text-amber-400 flex-shrink-0 ml-2">
             {formatCurrency(reservation.totalPricePkr)}
           </span>
         </div>
 
       </div>
     </div>
+
   );
 };
