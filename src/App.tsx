@@ -27,10 +27,11 @@ import { fetchDealsApi, fetchMyReservationsApi } from './services/api';
 import { Bell, Gift, Sun, Moon } from 'lucide-react';
 
 const STORAGE_KEYS = {
-  RESERVATIONS: 'flashfruit_reservations_v1',
-  USER: 'flashfruit_user_v1',
-  THEME: 'flashfruit_theme_v1',
+  RESERVATIONS: 'flashfruit_reservations_v2',
+  USER: 'flashfruit_user_v2',
+  THEME: 'flashfruit_theme_v2',
 };
+
 
 export function App() {
   const [activeTab, setActiveTab] = useState<AppTab>('consumer');

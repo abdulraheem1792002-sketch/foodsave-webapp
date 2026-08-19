@@ -92,8 +92,8 @@ export const SocialProofTicker: React.FC = () => {
         isVisible ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-4 opacity-0 scale-95'
       }`}
     >
-      <div className="glass-panel p-3 sm:p-3.5 rounded-2xl border border-emerald-500/40 bg-[#07170f]/95 shadow-2xl backdrop-blur-xl flex items-center gap-3">
-        <div className="size-9 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-600 text-slate-950 flex items-center justify-center flex-shrink-0 shadow-md">
+      <div className="glass-panel p-3 sm:p-3.5 rounded-2xl border border-slate-700/80 bg-slate-950/95 shadow-2xl backdrop-blur-xl flex items-center gap-3">
+        <div className="size-9 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 text-slate-950 flex items-center justify-center flex-shrink-0 shadow-md">
           <ShoppingBag className="size-4" />
         </div>
 
@@ -102,29 +102,30 @@ export const SocialProofTicker: React.FC = () => {
             <span className="text-[11px] font-bold text-white truncate">
               {event.userName}
             </span>
-            <span className="text-[9px] text-amber-300 font-mono flex items-center gap-0.5">
+            <span className="text-[9px] text-amber-400 font-mono font-bold flex items-center gap-0.5">
               <Sparkles className="size-2.5" /> ₨ {event.savedPkr} saved
             </span>
           </div>
 
-          <p className="text-[11px] text-emerald-200/80 truncate">
-            {event.action} at <strong className="text-emerald-100">{event.storeName}</strong>
+          <p className="text-[11px] text-slate-300 truncate">
+            {event.action} at <strong className="text-emerald-300">{event.storeName}</strong>
           </p>
 
-          <p className="text-[9px] text-emerald-400/60 flex items-center gap-1 mt-0.5">
-            <MapPin className="size-2.5 text-amber-400" />
+          <p className="text-[9px] text-slate-400 flex items-center gap-1 mt-0.5">
+            <MapPin className="size-2.5 text-emerald-400" />
             <span>{event.city} • {event.timeAgo}</span>
           </p>
         </div>
 
         <button
           onClick={() => setIsDismissed(true)}
-          className="p-1 rounded-lg text-emerald-400/60 hover:text-white transition-colors"
+          className="p-1 rounded-lg text-slate-400 hover:text-white transition-colors"
           title="Dismiss live stream"
         >
           <X className="size-3.5" />
         </button>
       </div>
     </div>
+
   );
 };
