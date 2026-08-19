@@ -67,29 +67,29 @@ export const CommuteRouteMatcherModal: React.FC<CommuteRouteMatcherModalProps> =
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-2xl glass-panel border border-emerald-500/50 rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto bg-[#07170f]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-2xl glass-panel border border-slate-700/80 rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto bg-slate-950/95">
         
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full bg-emerald-950 hover:bg-emerald-900 border border-emerald-800 text-emerald-300 transition-colors"
+          className="absolute top-4 right-4 p-2 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 transition-colors"
         >
           <X className="size-5" />
         </button>
 
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">
-          <div className="size-12 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-600 text-slate-950 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+          <div className="size-12 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 text-slate-950 flex items-center justify-center shadow-lg shadow-emerald-500/20 flex-shrink-0 font-bold">
             <Car className="size-7" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-xl font-bold text-white">Smart Commute Route Matcher</h2>
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+              <h2 className="text-xl font-black text-white tracking-tight">Smart Commute Route Matcher</h2>
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
                 0-Min Detour AI
               </span>
             </div>
-            <p className="text-xs text-emerald-300/70">
+            <p className="text-xs text-slate-400 font-medium">
               Pick up tonight’s dinner on your drive home without adding a single extra minute
             </p>
           </div>
@@ -106,8 +106,8 @@ export const CommuteRouteMatcherModal: React.FC<CommuteRouteMatcherModalProps> =
               }}
               className={`px-3.5 py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-1.5 ${
                 selectedRouteId === r.id
-                  ? 'bg-amber-500 text-slate-950 shadow-lg scale-105'
-                  : 'bg-emerald-950 text-emerald-300 border border-emerald-800 hover:bg-emerald-900'
+                  ? 'bg-amber-400 text-slate-950 shadow-md scale-102 font-black'
+                  : 'bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800'
               }`}
             >
               <span>{r.city}: {r.origin.split(' ')[0]} ➔ {r.destination.split(' ')[0]}</span>
@@ -116,32 +116,32 @@ export const CommuteRouteMatcherModal: React.FC<CommuteRouteMatcherModalProps> =
         </div>
 
         {/* Route Telemetry Card */}
-        <div className="p-5 rounded-3xl bg-slate-950 border border-emerald-700/60 flex flex-col gap-4 mb-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-emerald-900/60 pb-3">
-            <div className="flex items-center gap-2 text-xs text-emerald-200">
+        <div className="p-5 rounded-3xl bg-slate-900/90 border border-slate-800 flex flex-col gap-4 mb-6 shadow-inner">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div className="flex items-center gap-2 text-xs text-slate-200">
               <span className="font-bold text-amber-300">{activeRoute.origin}</span>
               <ArrowRight className="size-3 text-emerald-400" />
               <span className="font-bold text-emerald-300">{activeRoute.destination}</span>
             </div>
-            <span className="text-[11px] text-emerald-400/80 font-mono">
+            <span className="text-[11px] text-slate-400 font-mono">
               {activeRoute.distanceKm} km • ~{activeRoute.commuteMinutes} mins drive
             </span>
           </div>
 
           {/* Savings Metric Pills */}
           <div className="grid grid-cols-3 gap-3 text-center">
-            <div className="p-3 rounded-2xl bg-emerald-950/80 border border-emerald-800">
-              <span className="text-[10px] text-emerald-400 font-semibold uppercase block">Detour Added</span>
-              <span className="font-black text-amber-300 text-base">+{activeRoute.detourMins} Mins (Zero)</span>
+            <div className="p-3 rounded-2xl bg-slate-950/80 border border-slate-800">
+              <span className="text-[10px] text-slate-400 font-semibold uppercase block">Detour Added</span>
+              <span className="font-black text-amber-400 text-base">+{activeRoute.detourMins} Mins (Zero)</span>
             </div>
 
-            <div className="p-3 rounded-2xl bg-emerald-950/80 border border-emerald-800">
-              <span className="text-[10px] text-emerald-400 font-semibold uppercase block">Fuel Saved</span>
-              <span className="font-black text-emerald-200 text-base">₨ {activeRoute.fuelSavedPkr}</span>
+            <div className="p-3 rounded-2xl bg-slate-950/80 border border-slate-800">
+              <span className="text-[10px] text-slate-400 font-semibold uppercase block">Fuel Saved</span>
+              <span className="font-black text-emerald-300 text-base">₨ {activeRoute.fuelSavedPkr}</span>
             </div>
 
-            <div className="p-3 rounded-2xl bg-emerald-950/80 border border-emerald-800">
-              <span className="text-[10px] text-emerald-400 font-semibold uppercase block">Curbside Handover</span>
+            <div className="p-3 rounded-2xl bg-slate-950/80 border border-slate-800">
+              <span className="text-[10px] text-slate-400 font-semibold uppercase block">Curbside Handover</span>
               <span className="font-black text-teal-300 text-base">Car Trunk Ready</span>
             </div>
           </div>
@@ -159,25 +159,25 @@ export const CommuteRouteMatcherModal: React.FC<CommuteRouteMatcherModalProps> =
               matchedDeals.map((deal) => (
                 <div
                   key={deal.id}
-                  className="p-4 rounded-2xl bg-emerald-950/60 border border-emerald-800 hover:border-emerald-600 transition-all flex items-center justify-between gap-4"
+                  className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-slate-700 transition-all flex items-center justify-between gap-4 shadow-sm"
                 >
                   <div className="flex items-center gap-3">
                     <img
                       src={deal.imageUrl}
                       alt={deal.title}
-                      className="size-14 rounded-xl object-cover border border-emerald-700"
+                      className="size-14 rounded-xl object-cover border border-slate-700 flex-shrink-0"
                     />
                     <div>
                       <div className="flex items-center gap-2">
                         <h4 className="text-xs font-bold text-white">{deal.title}</h4>
-                        <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                        <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">
                           {deal.discountPercent}% OFF
                         </span>
                       </div>
-                      <p className="text-[11px] text-emerald-300/70">{deal.storeName} • {deal.pickupDeadline}</p>
-                      <span className="font-mono text-xs font-black text-amber-300 mt-0.5 block">
+                      <p className="text-[11px] text-slate-400">{deal.storeName} • {deal.pickupDeadline}</p>
+                      <span className="font-mono text-xs font-black text-amber-400 mt-0.5 block">
                         {formatCurrency(deal.currentPricePkr)}{' '}
-                        <span className="line-through text-emerald-500/60 text-[10px] font-normal">{formatCurrency(deal.originalPricePkr)}</span>
+                        <span className="line-through text-slate-500 text-[10px] font-normal">{formatCurrency(deal.originalPricePkr)}</span>
                       </span>
                     </div>
                   </div>
@@ -187,14 +187,14 @@ export const CommuteRouteMatcherModal: React.FC<CommuteRouteMatcherModalProps> =
                       onClose();
                       onReserveDeal(deal);
                     }}
-                    className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-lg transition-transform active:scale-95 flex items-center gap-1"
+                    className="px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs shadow-md transition-all active:scale-95 flex items-center gap-1"
                   >
                     <span>Reserve for Drive</span>
                   </button>
                 </div>
               ))
             ) : (
-              <div className="p-4 rounded-2xl bg-emerald-950/30 border border-emerald-900 text-center text-xs text-emerald-300/70">
+              <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 text-center text-xs text-slate-400">
                 No active deals directly on this route at this minute. Checking surrounding branches...
               </div>
             )}
@@ -203,5 +203,6 @@ export const CommuteRouteMatcherModal: React.FC<CommuteRouteMatcherModalProps> =
 
       </div>
     </div>
+
   );
 };

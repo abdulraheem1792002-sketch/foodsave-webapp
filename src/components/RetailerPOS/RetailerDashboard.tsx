@@ -249,23 +249,23 @@ export const RetailerDashboard: React.FC<RetailerDashboardProps> = ({
     <div className="flex flex-col gap-8 pb-12 animate-in fade-in duration-300">
       
       {/* Store Header & Multi-Branch Switcher */}
-      <div className="glass-panel p-6 rounded-3xl border border-amber-500/40 bg-gradient-to-r from-emerald-950/80 via-teal-950/60 to-slate-950 flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div className="glass-panel p-6 rounded-3xl border border-slate-700/80 bg-gradient-to-r from-slate-900 via-slate-900/90 to-slate-950 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-2xl">
         <div className="flex items-center gap-4">
-          <div className="size-16 rounded-2xl bg-amber-500/20 text-amber-300 border border-amber-500/40 flex items-center justify-center text-3xl font-bold shadow-lg">
+          <div className="size-16 rounded-2xl bg-amber-500/15 text-amber-300 border border-amber-500/30 flex items-center justify-center text-3xl font-bold shadow-lg">
             🏪
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-xl font-bold text-white">{selectedStore.name}</h2>
+              <h2 className="text-xl font-black text-white tracking-tight">{selectedStore.name}</h2>
               {selectedStore.isVerified && (
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1">
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
                   <ShieldCheck className="size-3.5 text-emerald-400" />
                   Verified Store
                 </span>
               )}
             </div>
-            <p className="text-xs text-emerald-300/80 mt-0.5 flex items-center gap-1.5">
-              <MapPin className="size-3 text-amber-400" />
+            <p className="text-xs text-slate-400 mt-0.5 flex items-center gap-1.5 font-medium">
+              <MapPin className="size-3 text-emerald-400" />
               {selectedStore.address}, {selectedStore.city} (Pakistan)
             </p>
           </div>
@@ -274,8 +274,8 @@ export const RetailerDashboard: React.FC<RetailerDashboardProps> = ({
         {/* Multi-Branch Selector & Action Controls */}
         <div className="flex flex-wrap items-center gap-2">
           {/* Branch Switcher Dropdown */}
-          <div className="flex items-center gap-1 bg-emerald-950 p-1 rounded-2xl border border-emerald-800 text-xs">
-            <span className="text-[10px] uppercase font-bold text-emerald-400 px-2">Branch:</span>
+          <div className="flex items-center gap-1 bg-slate-950 p-1.5 rounded-2xl border border-slate-800 text-xs shadow-inner">
+            <span className="text-[10px] uppercase font-bold text-slate-400 px-2">Branch:</span>
             <select
               value={selectedStoreId}
               onChange={(e) => setSelectedStoreId(e.target.value)}
@@ -291,7 +291,7 @@ export const RetailerDashboard: React.FC<RetailerDashboardProps> = ({
 
           <button
             onClick={() => setIsVerifyPassOpen(true)}
-            className="px-3.5 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-lg transition-all"
+            className="px-3.5 py-2.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-black flex items-center gap-1.5 shadow-md transition-all active:scale-95"
           >
             <QrCode className="size-4" />
             <span>Verify Customer Pass</span>
@@ -299,7 +299,7 @@ export const RetailerDashboard: React.FC<RetailerDashboardProps> = ({
 
           <button
             onClick={() => setIsBarcodeOpen(true)}
-            className="px-3.5 py-2.5 rounded-2xl bg-emerald-900/80 hover:bg-emerald-800 text-emerald-200 border border-emerald-700 text-xs font-semibold flex items-center gap-1.5 transition-colors"
+            className="px-3.5 py-2.5 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm"
           >
             <Scan className="size-4 text-amber-400" />
             <span>Scan Barcode / OCR</span>
@@ -307,7 +307,7 @@ export const RetailerDashboard: React.FC<RetailerDashboardProps> = ({
 
           <button
             onClick={() => setIsAddItemOpen(true)}
-            className="px-4 py-2.5 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-400 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs shadow-xl flex items-center gap-1.5 transition-transform transform active:scale-95"
+            className="px-4 py-2.5 rounded-2xl bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-xs shadow-xl flex items-center gap-1.5 transition-all transform active:scale-95"
           >
             <Plus className="size-4" />
             <span>List Surplus Item</span>
@@ -319,70 +319,71 @@ export const RetailerDashboard: React.FC<RetailerDashboardProps> = ({
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         
         {/* Metric 1: ₨ Recovered */}
-        <div className="glass-panel p-5 rounded-3xl border border-amber-500/30 flex items-start justify-between">
+        <div className="glass-panel p-5 rounded-3xl border border-slate-800 bg-slate-900/80 flex items-start justify-between shadow-sm">
           <div>
-            <span className="text-xs text-amber-300/80 font-medium block mb-1">Daily Recovery Total</span>
-            <div className="text-2xl font-black text-amber-300 tracking-tight mb-1">
+            <span className="text-xs text-slate-400 font-medium block mb-1">Daily Recovery Total</span>
+            <div className="text-2xl font-black text-amber-400 tracking-tight mb-1">
               {formatCurrency(selectedStore.totalRecoveredPkr)}
             </div>
             <span className="text-[11px] text-emerald-400 flex items-center gap-1 font-semibold">
               <TrendingUp className="size-3.5" /> Recovered Revenue
             </span>
           </div>
-          <div className="p-3 rounded-2xl bg-amber-500/20 text-amber-300 border border-amber-500/30">
+          <div className="p-3 rounded-2xl bg-amber-500/15 text-amber-300 border border-amber-500/30">
             <DollarSign className="size-6" />
           </div>
         </div>
 
         {/* Metric 2: Wasted Value Avoided */}
-        <div className="glass-panel p-5 rounded-3xl border border-emerald-500/30 flex items-start justify-between">
+        <div className="glass-panel p-5 rounded-3xl border border-slate-800 bg-slate-900/80 flex items-start justify-between shadow-sm">
           <div>
-            <span className="text-xs text-emerald-300/80 font-medium block mb-1">Wasted Value Diverted</span>
-            <div className="text-2xl font-black text-emerald-200 tracking-tight mb-1">
+            <span className="text-xs text-slate-400 font-medium block mb-1">Wasted Value Diverted</span>
+            <div className="text-2xl font-black text-emerald-300 tracking-tight mb-1">
               {formatCurrency(selectedStore.totalWastedValueAvoidedPkr)}
             </div>
-            <span className="text-[11px] text-emerald-300/70 flex items-center gap-1">
+            <span className="text-[11px] text-slate-400 flex items-center gap-1 font-medium">
               <Leaf className="size-3.5 text-emerald-400" /> Edible Food Rescued
             </span>
           </div>
-          <div className="p-3 rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+          <div className="p-3 rounded-2xl bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
             <Leaf className="size-6" />
           </div>
         </div>
 
         {/* Metric 3: NGO Charity Donations */}
-        <div className="glass-panel p-5 rounded-3xl border border-rose-500/30 flex items-start justify-between">
+        <div className="glass-panel p-5 rounded-3xl border border-slate-800 bg-slate-900/80 flex items-start justify-between shadow-sm">
           <div>
-            <span className="text-xs text-rose-300/80 font-medium block mb-1">NGO Rescue Donations</span>
-            <div className="text-2xl font-black text-rose-300 tracking-tight mb-1">
+            <span className="text-xs text-slate-400 font-medium block mb-1">NGO Rescue Donations</span>
+            <div className="text-2xl font-black text-rose-400 tracking-tight mb-1">
               {donationsList.length} Dispatched
             </div>
             <span className="text-[11px] text-rose-400 flex items-center gap-1 font-semibold">
               <Heart className="size-3.5 fill-rose-400" /> Saylani / Edhi / JDC
             </span>
           </div>
-          <div className="p-3 rounded-2xl bg-rose-500/20 text-rose-400 border border-rose-500/30">
+          <div className="p-3 rounded-2xl bg-rose-500/15 text-rose-400 border border-rose-500/30">
             <Heart className="size-6" />
           </div>
         </div>
 
         {/* Metric 4: Rule Decay Proof */}
-        <div className="glass-panel p-5 rounded-3xl border border-teal-500/30 bg-gradient-to-br from-teal-950/60 to-emerald-950/80 flex items-start justify-between">
+        <div className="glass-panel p-5 rounded-3xl border border-slate-800 bg-slate-900/80 flex items-start justify-between shadow-sm">
           <div>
-            <span className="text-xs text-teal-300/80 font-medium block mb-1">Auto Price Decay</span>
+            <span className="text-xs text-slate-400 font-medium block mb-1">Auto Price Decay</span>
             <div className="text-xl font-black text-white tracking-tight mb-1">
               Rule Active
             </div>
-            <p className="text-[11px] text-teal-200/80 leading-snug">
+            <p className="text-[11px] text-slate-400 leading-snug">
               30% → 50% → 75% steps before expiry.
             </p>
           </div>
-          <div className="p-3 rounded-2xl bg-teal-500/20 text-teal-300 border border-teal-500/30">
+          <div className="p-3 rounded-2xl bg-teal-500/15 text-teal-300 border border-teal-500/30">
             <Zap className="size-6" />
           </div>
         </div>
 
       </div>
+
 
       {/* Auto-Generated Time-Decay Curve Graph */}
       <div className="glass-panel p-6 rounded-3xl border border-emerald-800/40">
